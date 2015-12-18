@@ -1,13 +1,13 @@
-[title]: - "OSG Connect Quickstart"
+[title]: - "CMS Connect Quickstart"
 
-## Login to OSG Connect
+## Login to CMS-Connect
 
-If you have not already registered for OSG Connect, go to [the
-registration site](http://osgconnect.net/signup) and follow the instructions there.
-Once registered, you are authorized to use `login.osgconnect.net` (the
+If you have not already registered for CMS Connect, go to [the
+registration site](http://connect.uscms.org/signup) and follow the instructions there.
+Once registered, you are authorized to use `login.uscms.org` (the
 HTCondor submit host) and `stash.osgconnect.net` (the data host), in each
-case authenticating with your OSG Connect ID and password.  For the rest of the
-material on this page, you will need to ssh to `login.osgconnect.net`.
+case authenticating with your CMS Connect ID and password.  For the rest of the
+material on this page, you will need to ssh to `login.uscms.org`.
 
 ## Set up the tutorial
 
@@ -289,61 +289,6 @@ And let's submit:
 	10 job(s) submitted to cluster 938. 
 
 
-### Where did jobs run? 
-
-When we start submitting many simultaneous jobs into the queue, it might
-be worth looking at where they run. To get that information, we'll use a
-couple of `condor_history` commands. First, run `condor_history -long jobid`
-for your first job. Again the output is quite long:
-
-	$ condor_history -long 938
-	
-	MaxHosts = 1
-	MemoryUsage = ( ( ResidentSetSize + 1023 ) / 1024 )
-	JobCurrentStartTransferOutputDate = 1377112243
-	User = "netid@login01.osgconnect.net"
-	... 
-
-Looking through here for a hostname, we can see that the parameter
-that we want to know is `LastRemoteHost`. That's what job slot our job
-ran on. With that detail, we can construct a shell command to get
-the execution node for each of our 100 jobs, and we can plot the
-spread. LastRemoteHost normally combines a slot name and a host name,
-separated by an @ symbol, so we'll use the UNIX cut command to slice off
-the slot name and look only at hostnames. We'll cut again on the period
-in the hostname to grab the domain where the job ran.
-
-For illustration, the author has submitted a thousand jobs for a more
-interesting distribution output.
-
-	$ condor_history -format '%s\n' LastRemoteHost 942 | cut -d@ -f2 | distribution --height=100
-	Val                    |Ct (Pct)     Histogram
-	[netid@login01 log]$ condor_history -format '%s\n' LastRemoteHost 959 | cut -d@ -f2 | cut -d. -f2,3 | distribution --height=100
-	Val          |Ct (Pct)     Histogram
-	mwt2.org     |456 (46.77%) +++++++++++++++++++++++++++++++++++++++++++++++++++++
-	uchicago.edu |422 (43.28%) +++++++++++++++++++++++++++++++++++++++++++++++++
-	local        |28 (2.87%)   ++++
-	t2.ucsd      |23 (2.36%)   +++
-	phys.uconn   |12 (1.23%)   ++
-	tusker.hcc   |10 (1.03%)   ++
-	...
-
-The distribution program reduces a list of hostnames to a set of
-hostnames with no duplication (much like `sort | uniq -c`), but
-additionally plots a distribution histogram on your terminal
-window. This is nice for seeing how Condor selected your execution
-endpoints.
-
-There is also `condor_plot` a command that plots similar information in a
-HTML page. You can have bar plots, pie charts and more.
-
-
-Workload Analysis 
------------------
-
-OSG Connect also has a page that provides job analytics on running and recently completed jobs. You can visit it [here](http://osgconnect.net/metrics/user).
-
-
 Removing jobs
 --------------
 
@@ -361,4 +306,4 @@ all jobs belonging to the user. The `condor_rm` documenation has more
 details on using `condor_rm` including ways to remove jobs based on other
 constraints.
 
-[You can register at https://osgconnect.net/signup](https://osgconnect.net/signup)
+[You can register at https://login.uscms.org/signup](https://connect.uscms.org/signup)
