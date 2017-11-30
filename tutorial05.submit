@@ -1,0 +1,19 @@
+Universe = vanilla 
+Executable = short.sh 
+Arguments = 10
+Error = log/job.err.$(Cluster)-$(Process) 
+Output = log/job.out.$(Cluster)-$(Process) 
+Log = log/job.log.$(Cluster) 
+
+# Specify CPU,Memory and Disk
+# Default units if not specified:
+# Disk: Kb, Memory:Mb
+request_cpus = 1
+request_disk = 100 Mb
+request_memory = 2 Gb
+
+# Global Pool parameters
++DESIRED_Sites = "T2_US_Nebraska,T2_US_UCSD,T1_US_FNAL"
++MaxWallTimeMins = 10
+
+Queue 1

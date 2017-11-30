@@ -1,8 +1,15 @@
 Universe = vanilla 
 Executable = short.sh 
-Arguments = 60 # to sleep 60 seconds 
+Arguments = 10
 Error = log/job.err.$(Cluster)-$(Process) 
 Output = log/job.out.$(Cluster)-$(Process) 
 Log = log/job.log.$(Cluster) 
-#+ProjectName="ConnectTrain"
+
+# Specify CPU,Memory and Disk
+# Default units if not specified:
+# Disk: Kb, Memory:Mb
+request_cpus = 1
+request_disk = 100 Mb
+request_memory = 2 Gb
+
 Queue 2
