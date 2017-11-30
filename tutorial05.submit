@@ -16,4 +16,4 @@ request_memory = 2 Gb
 +DESIRED_Sites = "T2_US_Nebraska,T2_US_UCSD,T1_US_FNAL"
 +MaxWallTimeMins = 10
 
-Queue 1
+Queue 2

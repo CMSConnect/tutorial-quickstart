@@ -5,4 +5,4 @@ Error = log/job.err.$(Cluster)-$(Process)
 Output = log/job.out.$(Cluster)-$(Process) 
 Log = log/job.log.$(Cluster) 
 #+ProjectName="ConnectTrain"
-Queue 2
+Queue 1

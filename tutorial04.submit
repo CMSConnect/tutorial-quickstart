@@ -12,4 +12,4 @@ request_cpus = 1
 request_disk = 100 Mb
 request_memory = 2 Gb
 
-Queue 2
+Queue 1
